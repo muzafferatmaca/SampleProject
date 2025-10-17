@@ -16,14 +16,23 @@ class AndroidApplicationComposeConventionPlugin : Plugin<Project> {
         with(target) {
             apply(plugin = "org.jetbrains.kotlin.plugin.compose")
             val extension = extensions.getByType<ApplicationExtension>()
+
             with(extension) {
+
+                buildFeatures {
+                    compose = true
+                }
+
                 dependencies {
-                    val bom = libs.findLibrary("compose-bom").get()
+                    "implementation"(libs.findLibrary("androidx-activity-compose").get())
+                    val bom = libs.findLibrary("androidx-compose-bom").get()
                     "implementation"(platform(bom))
-                    "implementation"(libs.findLibrary("material3").get())
+                    "implementation"(libs.findLibrary("androidx-ui").get())
+                    "implementation"(libs.findLibrary("androidx-ui-graphics").get())
+                    "implementation"(libs.findLibrary("androidx-ui-tooling-preview").get())
+                    "implementation"(libs.findLibrary("androidx-material3").get())
                     "androidTestImplementation"(platform(bom))
-                    "implementation"(libs.findLibrary("compose-ui-tooling-preview").get())
-                    "debugImplementation"(libs.findLibrary("compose-ui-tooling").get())
+                    "debugImplementation"(libs.findLibrary("androidx-ui-tooling").get())
                 }
             }
         }

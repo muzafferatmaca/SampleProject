@@ -34,7 +34,6 @@ class AndroidApplicationConventionPlugin : Plugin<Project> {
                 compileOptions.apply {
                     sourceCompatibility = AppConfig.JAVA_VERSION
                     targetCompatibility = AppConfig.JAVA_VERSION
-                    isCoreLibraryDesugaringEnabled = true
                 }
 
                 buildTypes {
@@ -62,7 +61,6 @@ class AndroidApplicationConventionPlugin : Plugin<Project> {
         project: Project
     ) {
         val baseExtension = project.extensions.getByType(BaseAppModuleExtension::class.java)
-        signingConfig = baseExtension.signingConfigs.getByName("release")
         isDebuggable = buildType.isDebuggable
         isMinifyEnabled = buildType.isMinifyEnabled
         isShrinkResources = buildType.isShrinkResources
@@ -70,6 +68,7 @@ class AndroidApplicationConventionPlugin : Plugin<Project> {
             baseExtension.getDefaultProguardFile("proguard-android-optimize.txt"),
             "proguard-rules.pro"
         )
+        manifestPlaceholders["appName"] = buildType.appName
         versionNameSuffix = buildType.versionNameIdSuffix
         applicationIdSuffix = buildType.applicationIdSuffix
     }

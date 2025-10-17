@@ -12,7 +12,7 @@ object AppConfig {
     const val MIN_SDK = 29
     const val TARGET_SDK = 36
     const val COMPILE_SDK = 36
-    val JAVA_VERSION = JavaVersion.VERSION_17
+    val JAVA_VERSION = JavaVersion.VERSION_21
     const val APPLICATION_ID = "com.muzafferatmaca.sampleproject"
 
 
